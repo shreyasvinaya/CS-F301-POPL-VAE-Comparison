@@ -127,7 +127,7 @@ Raw Results can be found in the `results` folder.
 4. **Uncertainty Modeling**
 - Advancements in uncertainty modeling, providing generative models with better capabilities to quantify and express uncertainty in predictions, which is crucial for real-world applications such as medical diagnosis and decision-making.
 
-5. **Some other POPL Aspects involed**
+5. **Some other POPL Aspects involved**
 - Concurrency and Parallelism
 - Type Systems
 - Domain-Specific Languages (DSLs)
