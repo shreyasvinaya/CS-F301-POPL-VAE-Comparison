@@ -1,2 +1,2 @@
-python basevae.py --impl pyro
-python basevae.py --impl pytorch
+python main.py --impl pyro
+python main.py --impl pytorch

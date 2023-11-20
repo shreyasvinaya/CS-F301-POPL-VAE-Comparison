@@ -9,13 +9,13 @@ import torch
 import torch.nn as nn
 from torch.nn import functional
 from torchvision.utils import save_image
-from mnist_cached import DATA_DIR, RESULTS_DIR
+from code_external.mnist_cached import DATA_DIR, RESULTS_DIR
 
 import pyro
 from pyro.contrib.examples import util
-from pyro.distributions import Bernoulli, Normal
+from pyro.distributions import Bernoulli, Normal  # type: ignore
 from pyro.infer import SVI, JitTrace_ELBO, Trace_ELBO
-from pyro.optim import Adam
+from pyro.optim import Adam  # type: ignore
 
 TRAIN = "train"
 TEST = "test"
@@ -71,7 +71,7 @@ class VAE(object, metaclass=ABCMeta):
             self.vae_decoder.eval()
 
     @abstractmethod
-    def compute_loss_and_gradient(self, x):
+    def compute_loss_and_gradient(self, x) -> int:
         return
 
     def model_eval(self, x):
@@ -128,7 +128,8 @@ class PyTorchVAEImpl(VAE):
     def compute_loss_and_gradient(self, x):
         self.optimizer.zero_grad()
         recon_x, z_mean, z_var = self.model_eval(x)
-        binary_cross_entropy = functional.binary_cross_entropy(recon_x, x.reshape(-1, 784))
+        binary_cross_entropy = functional.binary_cross_entropy(
+            recon_x, x.reshape(-1, 784))
         # Uses analytical KL divergence expression for D_kl(q(z|x) || p(z))
         # Refer to Appendix B from VAE paper:
         # Kingma and Welling. Auto-Encoding Variational Bayes. ICLR, 2014
@@ -149,17 +150,23 @@ class PyTorchVAEImpl(VAE):
 
 class PyroVAEImpl(VAE):
     """Implemented by us using Pyro probabilistic programming framework."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.optimizer = self.initialize_optimizer(lr=1e-3)
 
     def model(self, data):
         decoder = pyro.module("decoder", self.vae_decoder)
-        z_mean, z_std = torch.zeros([data.size(0),20]), torch.ones([data.size(0), 20])
+        z_mean, z_std = torch.zeros([data.size(0),
+                                     20]), torch.ones([data.size(0), 20])
         with pyro.plate("data", data.size(0)):
             z = pyro.sample("latent", Normal(z_mean, z_std).to_event(1))
             img = decoder.forward(z)
-            pyro.sample("obs", Bernoulli(img, validate_args=False).to_event(1),obs=data.reshape(-1, 784),)
+            pyro.sample(
+                "obs",
+                Bernoulli(img, validate_args=False).to_event(1),
+                obs=data.reshape(-1, 784),
+            )
 
     def guide(self, data):
         encoder = pyro.module("encoder", self.vae_encoder)

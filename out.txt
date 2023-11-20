@@ -1,0 +1,84 @@
+downloading data
+download complete.
+downloading data
+download complete.
+
+
+
+
+Running Pyro VAE implementation
+====> Epoch: 0 
+Training loss: 0.0016
+Test set loss: 0.0013
+====> Epoch: 1 
+Training loss: 0.0012
+Test set loss: 0.0012
+====> Epoch: 2 
+Training loss: 0.0011
+Test set loss: 0.0011
+====> Epoch: 3 
+Training loss: 0.0011
+Test set loss: 0.0011
+====> Epoch: 4 
+Training loss: 0.0011
+Test set loss: 0.0011
+====> Epoch: 5 
+Training loss: 0.0011
+Test set loss: 0.0011
+====> Epoch: 6 
+Training loss: 0.0011
+Test set loss: 0.0011
+====> Epoch: 7 
+Training loss: 0.0011
+Test set loss: 0.0011
+====> Epoch: 8 
+Training loss: 0.0011
+Test set loss: 0.0011
+====> Epoch: 9 
+Training loss: 0.0011
+Test set loss: 0.0011
+
+
+Total time taken: 45.55s
+downloading data
+download complete.
+downloading data
+download complete.
+
+
+
+
+Running PyTorch VAE implementation
+====> Epoch: 0 
+Training loss: 0.0016
+Test set loss: 0.0012
+====> Epoch: 1 
+Training loss: 0.0012
+Test set loss: 0.0011
+====> Epoch: 2 
+Training loss: 0.0011
+Test set loss: 0.0010
+====> Epoch: 3 
+Training loss: 0.0011
+Test set loss: 0.0010
+====> Epoch: 4 
+Training loss: 0.0011
+Test set loss: 0.0010
+====> Epoch: 5 
+Training loss: 0.0011
+Test set loss: 0.0010
+====> Epoch: 6 
+Training loss: 0.0011
+Test set loss: 0.0010
+====> Epoch: 7 
+Training loss: 0.0011
+Test set loss: 0.0010
+====> Epoch: 8 
+Training loss: 0.0011
+Test set loss: 0.0010
+====> Epoch: 9 
+Training loss: 0.0011
+Test set loss: 0.0010
+
+
+Total time taken: 34.27s
