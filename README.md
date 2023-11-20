@@ -101,7 +101,9 @@ This is a comparitive study using two python libraries:
 10. **Libraries and Frameworks (Lines 7-14, 25, 27-28, 34, 51, 91-98):** 
     - The code extensively uses external libraries (PyTorch, Pyro) and frameworks (torch.nn, pyro.infer, torchvision, etc.) that offer high-level functionalities to build and train neural networks and probabilistic models, abstracting low-level implementation details.
    
-Regarding difficulties faced, integrating Pyro and PyTorch into the VAE implementation presented challenges in terms of different APIs, debugging, and aligning the functionality between the two frameworks. Managing the state and mode changes to be error-prone was also one of the challenges faced. Additionally, ensuring compatibility and consistency between the different versions of the libraries was a concern.
+* Regarding difficulties faced, integrating Pyro and PyTorch into the VAE implementation presented challenges in terms of different APIs, debugging, and aligning the functionality between the two frameworks.
+* Managing the state and mode changes to be error-prone was also one of the challenges faced.
+* Additionally, ensuring compatibility and consistency between the different versions of the libraries was a concern.
 ---
 ## Results
 
