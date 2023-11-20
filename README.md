@@ -69,8 +69,39 @@ This is a comparitive study using two python libraries:
 
 > What were the POPL aspects involved in the implementation. NOT theoretical answers. Have pointers to the lines of code and explain the POPL ideas/concepts involved and why they are necessary. I expect 5 to 10 points written on POPL aspects (bullet points, one after another). More the points you have the better it is. While writing the points also write your experience of the difficulties you faced.
 
-* **Memory Safety**: The use of `torch.tensor` and `torch.nn` modules from the pytorch library, along with the ownership system and borrowing rules, contributes to memory safety.
+1. **Abstraction (Lines 16-48, 66-100, 102-144):** 
+    - *Encapsulation:* The code implements classes such as `Encoder`, `Decoder`, and `VAE`, encapsulating specific functionalities related to encoding, decoding, and the Variational Autoencoder (VAE) itself.
+    - *Inheritance and Polymorphism:* The inheritance hierarchy is seen in the classes `VAE`, `PyTorchVAEImpl`, and `PyroVAEImpl`, where subclasses inherit behavior from the superclass (`VAE`) and implement their specific functionalities.
 
+2. **Data Types and Typing (Lines 8-10, 20-22, 24-27, 30-33, 36-39):** 
+    - The code uses type annotations (`: tuple[Any, torch.Tensor]`, `-> None`, etc.) for function signatures, indicating the expected input and output types, enhancing code readability and enabling type checking tools.
+
+3. **Functional and Imperative Paradigms (Lines 50-65, 102-144):** 
+    - The code combines both paradigms. The imperative paradigm is employed during training and testing loops (`for` loops, calling `.backward()` and `.step()` for optimization), while the functional paradigm is utilized for defining the forward pass in neural networks and loss computations.
+
+4. **Dynamic and Static Dispatch (Lines 70-73, 125-128):** 
+    - Dynamic dispatch is used for selecting the forward pass of the appropriate VAE implementation (`PyTorchVAEImpl` or `PyroVAEImpl`) based on the `args.impl` parameter.
+    - Static dispatch happens during the initialization of optimizers, where method overloading or polymorphism selects the optimizer based on the VAE implementation.
+
+5. **Error Handling (Lines 152-169):** 
+    - Error handling is employed through the use of assertions (`assert`) to ensure the correct version of Pyro is being used and to handle incorrect input for the chosen implementation.
+
+6. **Concurrency and Parallelism (Not explicitly present):** 
+    - While not explicitly coded in this implementation, the code structure doesn't directly employ concurrency or parallelism concepts. Utilizing PyTorch's or Pyro's capabilities in a distributed computing environment could incorporate these concepts.
+
+7. **Memory Management and Resource Handling (Lines 128, 147-151):** 
+    - Memory management is crucial in the optimization step (`self.optimizer.step()`), where gradients are computed and parameters are updated. Also, resource handling for file operations (`os.makedirs()`) and clearing parameter stores (`pyro.clear_param_store()`) is essential.
+
+8. **Control Structures (Lines 150-170, 175-178):** 
+    - The code uses control structures (`if-else`, `for`) for conditional execution (checking implementation type, deciding on skipping evaluation, etc.) and iterative tasks (training loop).
+
+9. **State and Mutation (Lines 30-37, 56-60, 111-113):** 
+    - State and mutation are managed throughout the code, notably with the change of mode (`TRAIN` or `TEST`) affecting the behavior of the VAE (`self.mode = TRAIN/TEST`), and through the optimization process where parameters are updated (`self.optimizer.step()`).
+
+10. **Libraries and Frameworks (Lines 7-14, 25, 27-28, 34, 51, 91-98):** 
+    - The code extensively uses external libraries (PyTorch, Pyro) and frameworks (torch.nn, pyro.infer, torchvision, etc.) that offer high-level functionalities to build and train neural networks and probabilistic models, abstracting low-level implementation details.
+   
+Regarding difficulties faced, integrating Pyro and PyTorch into the VAE implementation presented challenges in terms of different APIs, debugging, and aligning the functionality between the two frameworks. Managing the state and mode changes to be error-prone was also one of the challenges faced. Additionally, ensuring compatibility and consistency between the different versions of the libraries was a concern.
 ---
 ## Results
 
