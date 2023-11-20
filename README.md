@@ -115,19 +115,19 @@ This is a comparitive study using two python libraries:
 
 > If you were given more time what else would you do. What other POPL aspects might come into play?
 
-### Advanced Generative Models
+1. **Advanced Generative Models**
 - Continued exploration and development of new generative models beyond VAEs, such as improvements to Generative Adversarial Networks (GANs), flow-based models, and hybrid architectures that combine the strengths of different models.
 
-### Enhanced Sample Quality and Diversity
+2. **Enhanced Sample Quality and Diversity**
 - Improving the quality and diversity of generated samples, addressing challenges such as mode collapse in GANs and finding solutions for generating more realistic and diverse outputs in various domains.
 
-### Efficient Training Algorithms
+3. **Efficient Training Algorithms**
 - Designing more efficient training algorithms for generative models, including advancements in optimization techniques, regularization methods, and strategies for handling large-scale datasets.
 
-### Uncertainty Modeling
+4. **Uncertainty Modeling**
 - Advancements in uncertainty modeling, providing generative models with better capabilities to quantify and express uncertainty in predictions, which is crucial for real-world applications such as medical diagnosis and decision-making.
 
-## POPL Aspects
+5. **Some other POPL Aspects involed**
 - Concurrency and Parallelism
 - Type Systems
 - Domain-Specific Languages (DSLs)
