@@ -53,7 +53,8 @@ def get_ss_indices_per_class(y, sup_per_class):
     for j in range(10):
         np.random.shuffle(idxs_per_class[j])
         idxs_sup.extend(idxs_per_class[j][:sup_per_class])
-        idxs_unsup.extend(idxs_per_class[j][sup_per_class : len(idxs_per_class[j])])
+        idxs_unsup.extend(
+            idxs_per_class[j][sup_per_class:len(idxs_per_class[j])])
 
     return idxs_sup, idxs_unsup
 
@@ -110,7 +111,9 @@ class MNISTCached(MNIST):
     test_size = 10000
 
     def __init__(self, mode, sup_num, use_cuda=True, *args, **kwargs):
-        super().__init__(train=mode in ["sup", "unsup", "valid"], *args, **kwargs)
+        super().__init__(train=mode in ["sup", "unsup", "valid"],
+                         *args,
+                         **kwargs)
 
         # transformations on MNIST data (normalization and one-hot conversion for labels)
         def transform(x):
@@ -131,7 +134,7 @@ class MNISTCached(MNIST):
         if mode in ["sup", "unsup", "valid"]:
             # transform the training data if transformations are provided
             if transform is not None:
-                self.data = transform(self.data.float())
+                self.data = transform(self.data.float())  #type: ignore
             if target_transform is not None:
                 self.targets = target_transform(self.targets)
 
@@ -162,7 +165,8 @@ class MNISTCached(MNIST):
 
                 # making sure that the unsupervised labels are not available to inference
                 self.targets = (
-                    torch.Tensor(MNISTCached.train_labels_unsup.shape[0]).view(-1, 1)
+                    torch.Tensor(MNISTCached.train_labels_unsup.shape[0]).view(
+                        -1, 1)  #type: ignore
                 ) * np.nan
             else:
                 self.data, self.targets = (
@@ -183,17 +187,21 @@ class MNISTCached(MNIST):
         :returns tuple: (image, target) where target is index of the target class.
         """
         if self.mode in ["sup", "unsup", "valid"]:
-            img, target = self.data[index], self.targets[index]
+            img, target = self.data[index], self.targets[index]  # type: ignore
         elif self.mode == "test":
-            img, target = self.data[index], self.targets[index]
+            img, target = self.data[index], self.targets[index]  # type: ignore
         else:
             assert False, "invalid mode: {}".format(self.mode)
         return img, target
 
 
-def setup_data_loaders(
-    dataset, use_cuda, batch_size, sup_num=None, root=None, download=True, **kwargs
-):
+def setup_data_loaders(dataset,
+                       use_cuda,
+                       batch_size,
+                       sup_num=None,
+                       root=None,
+                       download=True,
+                       **kwargs):
     """
         helper function for setting up pytorch data loaders for a semi-supervised dataset
     :param dataset: the data to use
@@ -217,12 +225,15 @@ def setup_data_loaders(
         if sup_num is None and mode == "sup":
             # in this special case, we do not want "sup" and "valid" data loaders
             return loaders["unsup"], loaders["test"]
-        cached_data[mode] = dataset(
-            root=root, mode=mode, download=download, sup_num=sup_num, use_cuda=use_cuda
-        )
-        loaders[mode] = DataLoader(
-            cached_data[mode], batch_size=batch_size, shuffle=True, **kwargs
-        )
+        cached_data[mode] = dataset(root=root,
+                                    mode=mode,
+                                    download=download,
+                                    sup_num=sup_num,
+                                    use_cuda=use_cuda)
+        loaders[mode] = DataLoader(cached_data[mode],
+                                   batch_size=batch_size,
+                                   shuffle=True,
+                                   **kwargs)
 
     return loaders
 
@@ -237,6 +248,7 @@ def mkdir_p(path):
             raise
 
 
-EXAMPLE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, os.pardir)))
+EXAMPLE_DIR = os.path.dirname(
+    os.path.abspath(os.path.join(__file__, os.pardir)))
 DATA_DIR = os.path.join(EXAMPLE_DIR, "data")
 RESULTS_DIR = os.path.join(EXAMPLE_DIR, "results")
