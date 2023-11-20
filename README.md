@@ -16,8 +16,7 @@ In this project, we aim to implement Variational Autoencoders Generative Modelli
 > Where is the POPL angle in it?
 
 * We are specifically exploring two of the guidelines given to us: reliability and easy-of-use
-* This study will assess the differences in the two languages chosen - Rust and Python, and we will profile the code to detect bottlenecks
-* We are implementing modules common to quantum computing algorithms in order to create a makeshift library, providing **ease-of-use**
+
 
 > Was it solved before? How is your solution different?
 
