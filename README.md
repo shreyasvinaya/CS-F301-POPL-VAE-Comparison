@@ -16,7 +16,11 @@ In this project, we aim to implement Variational Autoencoders Generative Modelli
 > Where is the POPL angle in it?
 
 * We are specifically exploring two of the guidelines given to us: reliability and easy-of-use
-
+- Reliability- Reduces possibility of data type mismatches because we are 
+using inference algorithms.
+- Ease of use- Only the model and the guide specification is needed to run 
+the optimizer (the objective function does not need to be specified as in 
+the PyTorch implementation).
 
 > Was it solved before? How is your solution different?
 
