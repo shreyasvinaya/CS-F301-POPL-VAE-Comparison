@@ -108,7 +108,46 @@ This is a comparitive study using two python libraries:
 
 > Tests conducted. Dataset used. Benchmarks run. Show graphs. Line graphs, bar graphs, etc. How are you checking/validating that these results align with your initial problem statement. Data-driven proof points that the solution/system is working. Why should I be convinced it is working?
 
+#### Tests and Results on MNIST Dataset
 Results can be found in the `results` folder.
+
+#### Problem Statement Alignment:
+
+Both implementations aim to address image reconstruction and latent space representation learning using different frameworks, PyTorch and Pyro. The common objective is to reconstruct MNIST digits and potentially generalize on unseen data.
+
+#### Validation Strategies:
+
+**PyTorch Implementation:**
+- **Image Reconstruction:** Employs standard PyTorch modules for the encoder and decoder. Uses PyTorch's `torch.optim.Adam` for optimization.
+- **Loss Functions:** Utilizes binary cross-entropy and KL divergence to ensure accurate image reconstruction and meaningful latent representations.
+- **Evaluation Metrics:** Computes training and test losses per epoch to monitor model performance.
+
+**Pyro Implementation:**
+- **Probabilistic Programming:** Utilizes Pyro for modeling and inference via probabilistic programming.
+- **Custom Model & Guide:** Defines custom probabilistic models for the encoder and decoder.
+- **Elbo Loss Optimization:** Uses SVI (Stochastic Variational Inference) with Elbo loss for optimization.
+
+#### Validation Approaches:
+
+**PyTorch Implementation:**
+- **Validation:** Compares reconstructed images to originals and analyzes loss trends over training epochs. Checks for generalization on test data.
+
+**Pyro Implementation:**
+- **Probabilistic Validation:** Relies on Pyro's probabilistic modeling for validation. Evaluates performance using SVI and Elbo loss convergence.
+
+#### Performance Validation:
+
+**PyTorch Implementation:**
+- **Strengths:** Utilizes PyTorch's flexibility and standard optimization tools for VAE implementation.
+- **Considerations:** May require additional manual handling for certain probabilistic aspects compared to Pyro.
+
+**Pyro Implementation:**
+- **Strengths:** Leverages Pyro's probabilistic programming for a more expressive probabilistic model.
+- **Considerations:** Could have a steeper learning curve due to probabilistic programming concepts.
+
+### Conclusion:
+
+Even though both PyTorch and Pyro implementations align with the problem statement of VAE-based image reconstruction and latent space learning, PyTorch provides a more straightforward, traditional approach, while Pyro leverages the power of probabilistic programming for a more flexible and expressive modeling process.
 
 ---
 ## Potential for future work
