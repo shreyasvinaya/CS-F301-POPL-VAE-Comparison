@@ -40,14 +40,13 @@ pip install -r requirements.txt
 
 Running the code for Pyro
 ```bash
-python basevae.py --impl pyro
+python main.py --impl pyro
 ```
 
 Running the code for Pytorch
 ```bash
-python basevae.py --impl pytorch
+python main.py --impl pytorch
 ```
-
 
 
 - **Aim**: is to show improvement in reliability and ease of use for the developer to generate images.
@@ -109,6 +108,7 @@ This is a comparitive study using two python libraries:
 
 > Tests conducted. Dataset used. Benchmarks run. Show graphs. Line graphs, bar graphs, etc. How are you checking/validating that these results align with your initial problem statement. Data-driven proof points that the solution/system is working. Why should I be convinced it is working?
 
+Raw Results can be found in the `results` folder.
 
 ---
 ## Potential for future work
