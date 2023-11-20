@@ -108,7 +108,7 @@ This is a comparitive study using two python libraries:
 
 > Tests conducted. Dataset used. Benchmarks run. Show graphs. Line graphs, bar graphs, etc. How are you checking/validating that these results align with your initial problem statement. Data-driven proof points that the solution/system is working. Why should I be convinced it is working?
 
-Raw Results can be found in the `results` folder.
+Results can be found in the `results` folder.
 
 ---
 ## Potential for future work
