@@ -1,2 +1,2 @@
-from . import pyro_vae
 from . import vae
+from . import pyro_vae

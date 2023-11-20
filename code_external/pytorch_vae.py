@@ -2,7 +2,6 @@ import argparse
 import itertools
 import os
 from abc import ABCMeta, abstractmethod
-import time
 from code_orig.vae import VAE
 from typing import Any
 

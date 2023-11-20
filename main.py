@@ -38,4 +38,5 @@ if __name__ == "__main__":
     parser.add_argument("--jit", action="store_true")
     parser.set_defaults(skip_eval=False)
     args = parser.parse_args()
+    print(args)
     main(args)

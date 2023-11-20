@@ -1,0 +1,13 @@
+Namespace(num_epochs=10, batch_size=128, rng_seed=0, impl='pyro', skip_eval=False, jit=False)
+downloading data
+download complete.
+downloading data
+download complete.
+
+
+
+
+Running Pyro VAE implementation
+====> Epoch: 0 
+Training loss: 0.0016
+Test set loss: 0.0013
