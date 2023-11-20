@@ -26,10 +26,19 @@ class PyroVAEImpl(VAE):
     """Implemented by us using Pyro probabilistic programming framework."""
 
     def __init__(self, *args, **kwargs):
+        """Initialize PyroVAEImpl object
+        """
         super().__init__(*args, **kwargs)
         self.optimizer = self.initialize_optimizer(lr=1e-3)
 
     def model(self, data):
+        """Model
+
+        Parameters
+        ----------
+        data 
+            Input data
+        """
         decoder = pyro.module("decoder", self.vae_decoder)
         z_mean, z_std = torch.zeros([data.size(0),
                                      20]), torch.ones([data.size(0), 20])
@@ -43,12 +52,31 @@ class PyroVAEImpl(VAE):
             )
 
     def guide(self, data):
+        """Guide function
+
+        Parameters
+        ----------
+        data 
+            Input data
+        """
         encoder = pyro.module("encoder", self.vae_encoder)
         with pyro.plate("data", data.size(0)):
             z_mean, z_var = encoder.forward(data)
             pyro.sample("latent", Normal(z_mean, z_var.sqrt()).to_event(1))
 
     def compute_loss_and_gradient(self, x):
+        """Compute loss and gradient
+
+        Parameters
+        ----------
+        x : torch.Tensor
+            Input tensor
+            
+        Returns
+        -------
+        int
+            Loss value
+        """
         if self.mode == TRAIN:
             loss = self.optimizer.step(x)
         else:
@@ -57,6 +85,18 @@ class PyroVAEImpl(VAE):
         return loss
 
     def initialize_optimizer(self, lr):
+        """Initialize optimizer
+
+        Parameters
+        ----------
+        lr : int
+            Learning rate
+
+        Returns
+        -------
+        SVI
+            Stochastic variational inference
+        """
         optimizer = Adam({"lr": lr})
         elbo = JitTrace_ELBO() if self.args.jit else Trace_ELBO()
         return SVI(self.model, self.guide, optimizer, loss=elbo)
